@@ -9,22 +9,18 @@
 		"scripts": ["back.js", "jquery-3.0.0.js"]
 	},
 
-	"content_scripts": {
-		"js": ["main.js", "jquery-3.0.0.js"],
-		"matches": [ "*://*/*" ]
-	},
-
-	"icons": {
-		"48": "",
-		"16": ""
-	},
-
-	"default_locale": "en",
+	"content_scripts": [
+		{
+			"js": ["main.js", "jquery-3.0.0.js"],
+			"matches": [ "*://*/*" ],
+			"run_at": "document_end"
+		}
+	],
 
 	"permissions": [
 		"http://*/*", "https://*/*", "tabs", "background"
 	],
 	"content_security_policy": "script-src 'self'; object-src 'self'",
 	"minimum_chrome_version": "40",
-	"manifest_version": 2,
+	"manifest_version": 2
 }

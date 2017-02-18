@@ -29,6 +29,9 @@ chrome.runtime.onMessage.addListener(
                       windowId: tab.tab.windowId});
         }else if(response.code == "setActive"){
             chrome.tabs.update(parseInt(response.tabId),{active: true});
+        }else if(response.code == "moveTab"){
+            chrome.tabs.move(response.mId,{'index':response.mIndex});
+
         }else{
             console.log("broadcast");
             console.log(response);

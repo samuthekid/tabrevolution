@@ -6,7 +6,7 @@ ul.tr_sortable{
 #tr{
 	background-color: red;
 	position: fixed;
-	top: -54px;
+	top: -55px;
 	left: 0px;
 	width: 100%;
 	z-index: 100000000000;

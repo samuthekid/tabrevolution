@@ -1,4 +1,6 @@
 var stack;
+var order;
+var orderTmp;
 var myId;
 var windowId;
 
@@ -15,7 +17,7 @@ function init(){
     });
 
     $("#tr").on("mouseleave",function(e){
-        $("#tr").css("top","-54px");
+        $("#tr").css("top","-55px");
     });
 
     chrome.runtime.sendMessage({"code":"getData"},
@@ -25,18 +27,48 @@ function init(){
             windowId = response.windowId;
             console.log(myId+" "+windowId);
             redraw();
+            checkForMoves();
     });
     
     console.log("DONE");
+}
+
+function checkForMoves(){
+    if(order==null){
+        order = [];
+        $.each(stack,function(i,x){
+            order.push(x.id);
+        });
+        console.log("setting order");
+    }else{
+        orderTmp = [];
+        $.each($(".tr_sortable").children(),function(i,x){
+            orderTmp.push(parseInt(x.dataset["tabid"]));
+        });
+    }
+    var mId,mIndex;
+    $.each(order,function(i1,x1){
+        $.each(orderTmp,function(i2,x2){
+            if(x1!=x2){
+                mId=x2;
+                mIndex=i1;
+                return;
+            }
+        });
+    });
+    console.log(mId);
+    console.log(mIndex);
+    if(mId && mIndex)
+        chrome.runtime.sendMessage({"code":"moveTab","mId":mId,"mIndex":mIndex});
 }
 
 function makeSortable(){
     var tabs = $("#tr").tabs();
     tabs.find( ".tr_sortable" ).sortable({
         axis: "x",
-        stop: function() {
-            console.log("Acabou de mover");
+        stop: function(e) {
             tabs.tabs( "refresh" );
+            checkForMoves();
         }
     });
 }
@@ -103,6 +135,7 @@ function redraw(){
     inp.attr("value",location.href);
     url.append(inp);
     $("#tr").append(url);
+
     makeSortable();
     addEvents();
 }

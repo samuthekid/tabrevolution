@@ -19,7 +19,7 @@ function init(){
 
     $("#tr").on("mouseleave",function(e){
         if(isFullscreen){
-            $("#tr").css("top","-55px");
+            $("#tr").css("top","-52px");
         }else{
             $("#tr").css("top","-56px");
         }
@@ -65,7 +65,7 @@ function checkIfFullscreen(){
     isFullscreen = (window.innerHeight == screen.height);
     console.log(isFullscreen);
     if(isFullscreen)
-        $("#tr").css("top","-55px");
+        $("#tr").css("top","-52px");
 }
 
 function checkForMoves(){
@@ -127,18 +127,21 @@ function redraw(){
     url = $("<div>");
     url.addClass("tr_url");
     
-    prev = $("<button>");
+    prev = $("<div>");
     prev.attr("id","tr_prev");
+    prev.addClass("tr_button");
     prev.text("P");
     url.append(prev);
 
-    next = $("<button>");
+    next = $("<div>");
     next.attr("id","tr_next");
+    next.addClass("tr_button");
     next.text("N");
     url.append(next);
 
-    rel = $("<button>");
+    rel = $("<div>");
     rel.attr("id","tr_rel");
+    rel.addClass("tr_button");
     rel.text("R");
     url.append(rel);
 

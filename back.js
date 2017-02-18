@@ -10,17 +10,19 @@ function init(){
 
 function broadcast(data,sender){
     chrome.tabs.query({},function(tab){
+        stack = tab;
+        if(data==null) data = tab;
         $.each(tab,function(i,x){
-            if(x.id!=sender)
+            if(x.id!=sender){
                 chrome.tabs.sendMessage(x.id,data);
+            }
         });
     });
 }
 
 chrome.tabs.onUpdated.addListener(function(tabId,changeInfo,tab){
-    chrome.tabs.query({},function(tab){
-        stack = tab;
-    });
+    console.log("onUpdated activated");
+    broadcast(null,null);
 });
 
 chrome.tabs.onCreated.addListener(function(tab){
@@ -59,7 +61,7 @@ chrome.tabs.onReplaced.addListener(function(addedTabId,removedTabId){
 chrome.runtime.onMessage.addListener(
     function(response, tab, callback){
         if(response.code == "getData"){
-            console.log(tab.tab);
+            //console.log(tab.tab);
             callback({stack: stack,
                       myId: tab.tab.id,
                       windowId: tab.tab.windowId});

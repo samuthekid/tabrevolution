@@ -11,7 +11,7 @@
 
 	"content_scripts": [
 		{
-			"js": [ "jquery-3.0.0.js", "main.js", "style.css" ],
+			"js": [ "jquery-3.0.0.js", "jquery-ui.js", "main.js", "style.css" ],
 			"matches": [ "*://*/*" ]
 		}
 	],

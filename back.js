@@ -30,12 +30,11 @@ chrome.runtime.onMessage.addListener(
         }else if(response.code == "setActive"){
             chrome.tabs.update(parseInt(response.tabId),{active: true});
         }else if(response.code == "moveTab"){
-            chrome.tabs.move(response.mId,{'index':response.mIndex});
-
+            chrome.tabs.move(response.id,{'index':response.index});
         }else{
             console.log("broadcast");
             console.log(response);
-            broadcast(response,tab.id);
+            //broadcast(response,tab.id);
         }
 });
 

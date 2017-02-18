@@ -1,8 +1,8 @@
 var stack;
 var order;
-var orderTmp;
 var myId;
 var windowId;
+var isFullscreen;
 
 function init(){
     // Start here
@@ -13,11 +13,38 @@ function init(){
     $("body").append("<div id='tr'></div>");
 
     $("#tr").on("mouseenter",function(e){
-        $("#tr").css("top","0px");
+        if(isFullscreen)
+            $("#tr").css("top","0px");
     });
 
     $("#tr").on("mouseleave",function(e){
-        $("#tr").css("top","-55px");
+        if(isFullscreen){
+            $("#tr").css("top","-55px");
+        }else{
+            $("#tr").css("top","-56px");
+        }
+    });
+
+    $(window).on("resize",function(){
+        console.log("resize");
+        checkIfFullscreen();
+    });
+
+    $(window).on('keydown',function(e){
+        var key = e.which;
+        if(key == 13 && $(".tr_input").is(":focus")){
+            //submit form
+            var query = $(".tr_input").val();
+            url_reg = /^((http|https|ftp):\/\/)?([a-zA-Z0-9\_\-]+)((\.|\:)[a-zA-Z0-9\_\-]+)+(\/.*)?$/;
+            if(url_reg.test(query)){
+                //URL
+                location.href = query;
+            }else{
+                //Não url
+                location.href = "https://www.google.pt/search?q="+query;
+            }
+            return false;  
+        }
     });
 
     chrome.runtime.sendMessage({"code":"getData"},
@@ -26,40 +53,26 @@ function init(){
             myId = response.myId;
             windowId = response.windowId;
             console.log(myId+" "+windowId);
+            checkIfFullscreen();
             redraw();
-            checkForMoves();
     });
     
     console.log("DONE");
 }
 
+function checkIfFullscreen(){
+    console.log("checkIfFullscreen");
+    isFullscreen = (window.innerHeight == screen.height);
+    console.log(isFullscreen);
+    if(isFullscreen)
+        $("#tr").css("top","-55px");
+}
+
 function checkForMoves(){
-    if(order==null){
-        order = [];
-        $.each(stack,function(i,x){
-            order.push(x.id);
-        });
-        console.log("setting order");
-    }else{
-        orderTmp = [];
-        $.each($(".tr_sortable").children(),function(i,x){
-            orderTmp.push(parseInt(x.dataset["tabid"]));
-        });
-    }
-    var mId,mIndex;
-    $.each(order,function(i1,x1){
-        $.each(orderTmp,function(i2,x2){
-            if(x1!=x2){
-                mId=x2;
-                mIndex=i1;
-                return;
-            }
-        });
+    $.each($(".tr_sortable").children(),function(i,x){
+        x = parseInt(x.dataset["tabid"]);
+        chrome.runtime.sendMessage({"code":"moveTab","id":x,"index":i});
     });
-    console.log(mId);
-    console.log(mIndex);
-    if(mId && mIndex)
-        chrome.runtime.sendMessage({"code":"moveTab","mId":mId,"mIndex":mIndex});
 }
 
 function makeSortable(){
@@ -142,7 +155,6 @@ function redraw(){
 
 chrome.runtime.onMessage.addListener(
     function(response, tab, callback){
-        console.log("ON MESSAGE");
         stack = response;
         redraw();
     }

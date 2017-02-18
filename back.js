@@ -27,6 +27,8 @@ chrome.runtime.onMessage.addListener(
             callback({stack: stack,
                       myId: tab.tab.id,
                       windowId: tab.tab.windowId});
+        }else if(response.code == "setActive"){
+            chrome.tabs.update(parseInt(response.tabId),{active: true});
         }else{
             console.log("broadcast");
             console.log(response);
@@ -53,11 +55,6 @@ chrome.tabs.onMoved.addListener(function(tabId,moveInfo){
 
 chrome.tabs.onActivated.addListener(function(activeInfo){
     console.log("onActivated activated");
-    broadcast(null,null);
-});
-
-chrome.tabs.onHighlighted.addListener(function(highlightInfo){
-    console.log("onHighlighted activated");
     broadcast(null,null);
 });
 

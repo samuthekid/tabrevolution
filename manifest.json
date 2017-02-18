@@ -11,6 +11,7 @@
 
 	"content_scripts": [
 		{
+			"persistent": true,
 			"js": [ "jquery-3.0.0.js", "jquery-ui.js", "main.js", "style.css" ],
 			"matches": [ "*://*/*" ]
 		}

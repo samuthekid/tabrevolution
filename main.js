@@ -17,17 +17,20 @@ function init(){
             windowId = response.windowId;
             console.log(myId+" "+windowId);
             redraw();
-
-            var tabs = $("#tr").tabs();
-            tabs.find( ".tr_sortable" ).sortable({
-                axis: "x",
-                stop: function() {
-                    tabs.tabs( "refresh" );
-                }
-            });
     });
     
     console.log("DONE");
+}
+
+function makeSortable(){
+    var tabs = $("#tr").tabs();
+    tabs.find( ".tr_sortable" ).sortable({
+        axis: "x",
+        stop: function() {
+            console.log("Acabou de mover");
+            tabs.tabs( "refresh" );
+        }
+    });
 }
 
 function redraw(){
@@ -38,23 +41,30 @@ function redraw(){
         if(x.windowId == windowId){
             li = $("<li>");
             li.addClass("tr_tab");
-            //t.append("<img class='tr_favicon' src='"+tab.favIconUrl+"'/>");
+            li.attr("data-tabId",x.id);
             if(x.id == myId)
                 li.addClass("tr_this");
-            li.text(x.title);
-            console.log(x.title);
+            fav = "<img class='tr_favicon' style='width:17px;height:17px;' src='"+x.favIconUrl+"'/>";
+            li.html(fav+x.title);
             ul.append(li);
         }
     });
     $("#tr").append(ul);
+
+    url = $("<div>");
+    url.addClass("tr_url");;
+    inp = $("<input>");
+    inp.addClass("tr_input");
+    inp.attr("type","text");
+    url.append(inp);
+    $("#tr").append(url);
+    makeSortable();
 }
 
 chrome.runtime.onMessage.addListener(
     function(response, tab, callback){
         console.log("ON MESSAGE");
-        //console.log(response);
-        //console.log(tab);
-        //console.log(callback);
+        stack = response;
         redraw();
     }
 );

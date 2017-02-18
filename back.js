@@ -20,44 +20,6 @@ function broadcast(data,sender){
     });
 }
 
-chrome.tabs.onUpdated.addListener(function(tabId,changeInfo,tab){
-    console.log("onUpdated activated");
-    broadcast(null,null);
-});
-
-chrome.tabs.onCreated.addListener(function(tab){
-    console.log("onCreated activated");
-});
-
-chrome.tabs.onMoved.addListener(function(tabId,moveInfo){
-    console.log("onMoved activated");
-});
-
-chrome.tabs.onActivated.addListener(function(activeInfo){
-    console.log("onActivated activated");
-});
-
-chrome.tabs.onHighlighted.addListener(function(highlightInfo){
-    console.log("onHighlighted activated");
-});
-
-chrome.tabs.onDetached.addListener(function(tabId,detachInfo){
-    console.log("onDetached activated");
-});
-
-chrome.tabs.onAttached.addListener(function(tabId,attachInfo){
-    console.log("onAttached activated");
-});
-
-chrome.tabs.onRemoved.addListener(function(tabId,removeInfo){
-    console.log("onRemoved activated");
-});
-
-chrome.tabs.onReplaced.addListener(function(addedTabId,removedTabId){
-    console.log("onReplaced activated");
-});
-
-
 chrome.runtime.onMessage.addListener(
     function(response, tab, callback){
         if(response.code == "getData"){
@@ -73,3 +35,48 @@ chrome.runtime.onMessage.addListener(
 });
 
 init();
+
+chrome.tabs.onUpdated.addListener(function(tabId,changeInfo,tab){
+    console.log("onUpdated activated");
+    broadcast(null,null);
+});
+
+chrome.tabs.onCreated.addListener(function(tab){
+    console.log("onCreated activated");
+    broadcast(null,null);
+});
+
+chrome.tabs.onMoved.addListener(function(tabId,moveInfo){
+    console.log("onMoved activated");
+    broadcast(null,null);
+});
+
+chrome.tabs.onActivated.addListener(function(activeInfo){
+    console.log("onActivated activated");
+    broadcast(null,null);
+});
+
+chrome.tabs.onHighlighted.addListener(function(highlightInfo){
+    console.log("onHighlighted activated");
+    broadcast(null,null);
+});
+
+chrome.tabs.onDetached.addListener(function(tabId,detachInfo){
+    console.log("onDetached activated");
+    broadcast(null,null);
+});
+
+chrome.tabs.onAttached.addListener(function(tabId,attachInfo){
+    console.log("onAttached activated");
+    broadcast(null,null);
+});
+
+chrome.tabs.onRemoved.addListener(function(tabId,removeInfo){
+    console.log("onRemoved activated");
+    broadcast(null,null);
+});
+
+chrome.tabs.onReplaced.addListener(function(addedTabId,removedTabId){
+    console.log("onReplaced activated");
+    broadcast(null,null);
+});

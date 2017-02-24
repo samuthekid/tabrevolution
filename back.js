@@ -25,14 +25,20 @@ chrome.runtime.onMessage.addListener(
             callback({stack: stack,
                       myId: tab.tab.id,
                       windowId: tab.tab.windowId});
+
         }else if(response.code == "setActive"){
-            chrome.tabs.update(parseInt(response.tabId),{active: true});
+            chrome.tabs.update(response.tabId,{active: true});
+
         }else if(response.code == "closeTab"){
-            chrome.tabs.remove(parseInt(response.tabId));
+            console.log("response.tabId "+response.tabId);
+            console.log("tab.tab.id "+tab.tab.id);
+            chrome.tabs.remove(response.tabId);
             if(response.tabId != tab.tab.id)
-                chrome.tabs.highlight(tab.tab.id);
+                chrome.tabs.update(tab.tab.id, {active: true});
+
         }else if(response.code == "moveTab"){
             chrome.tabs.move(response.id,{'index':response.index});
+
         }else{
             //broadcast(response,tab.id);
         }

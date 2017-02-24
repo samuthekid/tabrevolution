@@ -48,7 +48,7 @@ function init(){
             stack = response.stack;
             myId = response.myId;
             windowId = response.windowId;
-            //console.log(myId+" "+windowId);
+            console.log(myId+" "+windowId);
             checkIfFullscreen();
             redraw();
     });
@@ -83,7 +83,10 @@ function makeSortable(){
 
 function addEvents(){
     $(".tr_tab").click(function(e) {
-        chrome.runtime.sendMessage({"code":"setActive","tabId":e.target.closest("li").dataset["tabid"]});
+        if(e.target.className == "tr_tab_close")
+            chrome.runtime.sendMessage({"code":"closeTab","tabId":parseInt(e.target.closest("li").dataset["tabid"])});
+        else
+            chrome.runtime.sendMessage({"code":"setActive","tabId":parseInt(e.target.closest("li").dataset["tabid"])});
     });
     $("#tr_prev").click(function(e){
         window.history.back();
@@ -93,9 +96,6 @@ function addEvents(){
     });
     $("#tr_rel").click(function(e){
         location.reload();
-    });
-    $(".tr_tab_close").click(function(e){
-        chrome.runtime.sendMessage({"code":"closeTab","tabId":e.target.closest("li").dataset["tabid"]});
     });
     $("input.tr_input").on("focus",function(e){
         $(e.target).select();

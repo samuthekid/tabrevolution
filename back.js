@@ -2,7 +2,6 @@ var stack;
 
 function init(){
     // Start here
-    console.log("back running");
     chrome.tabs.query({},function(tab){
         stack = tab;
     });
@@ -23,17 +22,18 @@ function broadcast(data,sender){
 chrome.runtime.onMessage.addListener(
     function(response, tab, callback){
         if(response.code == "getData"){
-            //console.log(tab.tab);
             callback({stack: stack,
                       myId: tab.tab.id,
                       windowId: tab.tab.windowId});
         }else if(response.code == "setActive"){
             chrome.tabs.update(parseInt(response.tabId),{active: true});
+        }else if(response.code == "closeTab"){
+            chrome.tabs.remove(parseInt(response.tabId));
+            if(response.tabId != tab.tab.id)
+                chrome.tabs.highlight(tab.tab.id);
         }else if(response.code == "moveTab"){
             chrome.tabs.move(response.id,{'index':response.index});
         }else{
-            console.log("broadcast");
-            console.log(response);
             //broadcast(response,tab.id);
         }
 });

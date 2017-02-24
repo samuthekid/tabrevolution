@@ -1,85 +1,141 @@
+
+div#tr{
+    all: initial;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    background-color: #31363b;
+    z-index: 100000000000;
+    box-shadow: 0px 2px 40px 0px rgba(0, 0, 0, 0.5);
+    -webkit-transition: all 0.12s ease;
+}
+
+div#tr.tr_hidden{
+    top: -61px;
+}
+
+div#tr.tr_disabled{
+    top: -200px;
+}
+
 ul.tr_sortable{
-	margin: 0px !important;
-	padding: 0px !important;
-}
-
-#tr{
-	background-color: red;
-	position: fixed;
-	top: -52px;
-	left: 0px;
-	width: 100%;
-	z-index: 100000000000;
-}
-
-.tr_sortable{
-	display: flex;
-	justify-content: flex-start;
-	align-items: flex-start;
-	flex-wrap: nowrap;
+    all: initial;
+    margin: 0px;
+    padding: 0px;
+    min-width: 100%;
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    box-shadow: 0px -10px 40px 0px rgba(0, 0, 0, 0.35) inset;
 }
 
 .tr_tab{
-	background-color: lightblue;
+    all: initial;
+    background-color: #989a9d;
     width: 200px;
     max-width: 200px;
     height: 20px;
     display: flex;
+    flex-direction: row;
     justify-content: flex-start;
     align-items: center;
     padding: 4px 8px;
-    border: solid 1px #99b7c8;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-    font-family: verdana !important;
-    font-size: 12px !important;
-    font-weight: 100;
+    margin: 0px 1px 0px 0px;
     cursor: default;
     -webkit-box-sizing: content-box;
     -webkit-user-select: none;
+    border-radius: 3px 3px 0px 0px;
 }
 
 .tr_tab:hover:not(.tr_this){
-	background-color: lightpink;
+    background-color: #cccdd0;
 }
 
 .tr_this{
-	background-color: lightgreen;
+    background-color: #eff0f1;
 }
 
 .tr_favicon{
-	height: 17px;
-	width: 17px;
-	padding-right: 6px;
-	-webkit-box-sizing: content-box
+    all: initial;
+    height: 17px;
+    width: 17px;
+    margin-right: 6px;
+    -webkit-box-sizing: content-box
 }
 
-.tr_button{
-	width: 24px !important;
-    height: 20px !important;
-    background-color: grey !important;
-    color: white !important;
-    font-family: verdana !important;
-    font-size: 13px !important;
-    text-align: center !important;
-    padding-top: 4px !important;
-    border: solid 1px black;
-    cursor: default;
+.tr_tab_title{
+    flex: 1;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    font-family: verdana;
+    font-size: 12px;
+    font-weight: 100;
+}
+
+.tr_tab_close{
+    width: 15px;
+    max-width: 15px;
+    background-color: #5a5a5a;
+    text-align: center;
+    color: white;
+    border-radius: 50%;
+    font-size: 12px;
+    margin-left: 6px;
+    font-family: verdana;
+    cursor: pointer;
 }
 
 .tr_url{
-	width: 100% !important;
-	display: flex !important;
-	justify-content: space-around !important;
+    all: initial;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: #eff0f1;
+}
+
+.tr_button{
+    all: initial;
+    width: 18px;
+    height: 18px;
+    font-family: verdana;
+    text-align: center;
+    margin: 4px 3px;
+    padding: 3px;
+    border: solid 1px #eaeaea;
+    border-radius: 4px;
+    cursor: default;
+}
+
+.tr_button:hover{
+    border: solid 1px #d3d4d4;
+    background: #f4f5f5;
+}
+
+.tr_button_img{
+    all: initial;
+    min-width: 18px;
+    width: 18px;
+    max-width: 18px;
+    min-height: 18px;
+    height: 18px;
+    max-height: 18px;
+    opacity: 0.6;
 }
 
 .tr_input{
-	flex: 1 !important;
-	width: 100% !important;
-	font-family: verdana !important;
-    font-size: 13px !important;
-    font-weight: 100 !important;
-    padding: 3px 8px !important;
-    margin: 0px !important;
+    all: initial;
+    flex: 1;
+    width: 100%;
+    font-family: verdana;
+    font-size: 13px;
+    font-weight: 100;
+    padding: 3px 8px;
+    margin: 0px;
 }

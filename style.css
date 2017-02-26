@@ -1,142 +1,146 @@
+.tr_reset{
+    all: initial !important;
+    * {
+        all: unset !important;
+    }
+}
 
 div#tr{
-    all: initial;
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    background-color: #31363b;
-    z-index: 100000000000;
-    box-shadow: 0px 2px 40px 0px rgba(0, 0, 0, 0.5);
-    -webkit-transition: all 0.12s ease;
+    position: fixed !important;
+    top: 0px !important;
+    left: 0px !important;
+    width: 100% !important;
+    background-color: #31363b !important;
+    z-index: 100000000000 !important;
+    box-shadow: 0px 2px 40px 0px rgba(0, 0, 0, 0.5) !important;
+    -webkit-transition: all 0.2s ease !important;
 }
 
 div#tr.tr_hidden{
-    top: -61px;
+    top: -61px !important;
 }
 
 div#tr.tr_disabled{
-    top: -200px;
+    top: -200px !important;
 }
 
 ul.tr_sortable{
-    all: initial;
-    margin: 0px;
-    padding: 0px;
-    min-width: 100%;
-    width: 100%;
-    max-width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: flex-start;
-    flex-wrap: nowrap;
-    box-shadow: 0px -10px 40px 0px rgba(0, 0, 0, 0.35) inset;
+    margin: 0px !important;
+    padding: 0px !important;
+    min-width: 100% !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+    flex-wrap: nowrap !important;
+    box-shadow: 0px -10px 40px 0px rgba(0, 0, 0, 0.35) inset !important;
 }
 
-.tr_tab{
-    all: initial;
-    background-color: #989a9d;
-    min-width: 40px;
-    width: 200px;
-    max-width: 200px;
-    height: 20px;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 4px 8px;
-    margin: 0px 1px 0px 0px;
-    cursor: default;
-    -webkit-box-sizing: content-box;
-    -webkit-user-select: none;
-    border-radius: 3px 3px 0px 0px;
+ul.tr_sortable::after{
+    width: 10px;
+    height: 10px;
+    background-color: white;
 }
 
-.tr_tab:hover:not(.tr_this){
-    background-color: #cccdd0;
+li.tr_tab{
+    background-color: #989a9d !important;
+    min-width: 40px !important;
+    width: 200px !important;
+    max-width: 200px !important;
+    height: 20px !important;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    padding: 4px 8px !important;
+    margin: 0px 1px 0px 0px !important;
+    cursor: default !important;
+    -webkit-box-sizing: content-box !important;
+    -webkit-user-select: none !important;
+    border-radius: 3px 3px 0px 0px !important;
 }
 
-.tr_this{
-    background-color: #eff0f1;
+li.tr_tab:hover:not(.tr_this){
+    background-color: #cccdd0 !important;
 }
 
-.tr_favicon{
-    all: initial;
-    height: 17px;
-    width: 17px;
-    margin-right: 6px;
-    -webkit-box-sizing: content-box
+li.tr_this{
+    background-color: #eff0f1 !important;
 }
 
-.tr_tab_title{
-    flex: 1;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-    font-family: verdana;
-    font-size: 12px;
-    font-weight: 100;
+img.tr_favicon{
+    height: 17px !important;
+    width: 17px !important;
+    margin-right: 6px !important;
 }
 
-.tr_tab_close{
-    width: 15px;
-    max-width: 15px;
-    background-color: #5a5a5a;
-    text-align: center;
-    color: white;
-    border-radius: 50%;
-    font-size: 12px;
-    margin-left: 6px;
-    font-family: verdana;
-    cursor: pointer;
+span.tr_tab_title{
+    flex: 1 !important;
+    text-overflow: ellipsis !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+    font-family: verdana !important;
+    font-size: 12px !important;
+    font-weight: 100 !important;
+    cursor: default !important;
 }
 
-.tr_url{
-    all: initial;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    background-color: #eff0f1;
+div.tr_tab_close{
+    width: 15px !important;
+    max-width: 15px !important;
+    background-color: #5a5a5a !important;
+    text-align: center !important;
+    color: white !important;
+    border-radius: 50% !important;
+    font-size: 12px !important;
+    margin-left: 6px !important;
+    font-family: verdana !important;
+    cursor: pointer !important;
 }
 
-.tr_button{
-    all: initial;
-    width: 18px;
-    height: 18px;
-    font-family: verdana;
-    text-align: center;
-    margin: 4px 3px;
-    padding: 3px;
-    border: solid 1px #eaeaea;
-    border-radius: 4px;
-    cursor: default;
+div.tr_url{
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-around !important;
+    background-color: #eff0f1 !important;
 }
 
-.tr_button:hover{
-    border: solid 1px #d3d4d4;
-    background: #f4f5f5;
+div.tr_button{
+    width: 18px !important;
+    height: 18px !important;
+    font-family: verdana !important;
+    text-align: center !important;
+    margin: 4px 3px !important;
+    padding: 3px !important;
+    border: solid 1px #eaeaea !important;
+    border-radius: 4px !important;
+    cursor: default !important;
 }
 
-.tr_button_img{
-    all: initial;
-    min-width: 18px;
-    width: 18px;
-    max-width: 18px;
-    min-height: 18px;
-    height: 18px;
-    max-height: 18px;
-    opacity: 0.6;
+div.tr_button:hover{
+    border: solid 1px #d3d4d4 !important;
+    background: #f4f5f5 !important;
 }
 
-.tr_input{
-    all: initial;
-    flex: 1;
-    width: 100%;
-    font-family: verdana;
-    font-size: 13px;
-    font-weight: 100;
-    padding: 3px 8px;
-    margin: 0px;
+img.tr_button_img{
+    min-width: 18px !important;
+    width: 18px !important;
+    max-width: 18px !important;
+    min-height: 18px !important;
+    height: 18px !important;
+    max-height: 18px !important;
+    opacity: 0.6 !important;
+}
+
+input.tr_input{
+    flex: 1 !important;
+    width: 100% !important;
+    font-family: verdana !important;
+    font-size: 13px !important;
+    font-weight: 100 !important;
+    padding: 3px 8px !important;
+    margin: 0px !important;
 }

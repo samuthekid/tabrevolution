@@ -30,8 +30,6 @@ chrome.runtime.onMessage.addListener(
             chrome.tabs.update(response.tabId,{active: true});
 
         }else if(response.code == "closeTab"){
-            console.log("response.tabId "+response.tabId);
-            console.log("tab.tab.id "+tab.tab.id);
             chrome.tabs.remove(response.tabId);
             if(response.tabId != tab.tab.id)
                 chrome.tabs.update(tab.tab.id, {active: true});

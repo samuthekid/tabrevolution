@@ -23,7 +23,18 @@
 			"run_at": "document_end"
 		}
 	],
-	"web_accessible_resources": ["style.css", "back.png", "forward.png", "reload.png"],
+	"web_accessible_resources":[
+		"style.css",
+		"assets/internet.png",
+		"assets/back.png",
+		"assets/forward.png",
+		"assets/reload.png",
+		"assets/close.png",
+		"assets/sound.png",
+		"assets/no_sound.png",
+		"assets/loading.gif",
+		"assets/add.png"
+	],
 
 	"permissions": [
 		"http://*/*", "https://*/*", "tabs", "background"

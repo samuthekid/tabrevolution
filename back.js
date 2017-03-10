@@ -26,8 +26,18 @@ chrome.runtime.onMessage.addListener(
                       myId: tab.tab.id,
                       windowId: tab.tab.windowId});
 
+        }else if(response.code == "checkIfFullscreen"){
+            chrome.windows.get(tab.tab.windowId, function(chromeWindow) {
+                // "normal", "minimized", "maximized" or "fullscreen"
+                callback({"isFullscreen":(chromeWindow.state == "fullscreen")});
+            });
+            return true;
+
         }else if(response.code == "setActive"){
             chrome.tabs.update(response.tabId,{active: true});
+
+        }else if(response.code == "createTab"){
+            chrome.tabs.create({});
 
         }else if(response.code == "closeTab"){
             chrome.tabs.remove(response.tabId);

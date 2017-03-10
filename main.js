@@ -73,7 +73,7 @@ function checkForMoves(){
 }
 
 function makeSortable(){
-    var tabs = $("#tr").tabs();
+    var tabs = $(".tr_tops").tabs();
     tabs.find(".tr_sortable").sortable({
         axis: "x",
         stop: function(e) {
@@ -143,16 +143,19 @@ function redraw(){
     tops.addClass("tr_tops");
 
     pins = $("<ul>");
+    pins.attr("id","tr_pins");
     pins.addClass("tr_reset tr_sortable tr_sortable_pinned");
 
     tabs = $("<ul>");
+    tabs.attr("id","tr_tabs");
     tabs.addClass("tr_reset tr_sortable");
 
     $.each(stack,function(i,x){
         if(x.windowId == windowId){
 
+            // LI CANT HAVE TR_RESET
             li = $("<li>");
-            li.addClass("tr_reset tr_tab");
+            li.addClass("tr_tab");
             li.attr("data-tabId",x.id);
             li.attr("data-tabIndex",x.index);
 
@@ -242,7 +245,7 @@ function redraw(){
     newtab = $("<div>");
     newtab.addClass("tr_reset tr_new_tab");
     newtab.append($("<img>").addClass("tr_reset tr_new_tab_icon").attr("src",chrome.extension.getURL("assets/add.png")));
-    //tops.append(newtab);
+    tops.append(newtab);
 
     $("#tr").append(tops);
 
@@ -289,4 +292,5 @@ chrome.runtime.onMessage.addListener(
     }
 );
 
+// DOCUMENT_END
 init();

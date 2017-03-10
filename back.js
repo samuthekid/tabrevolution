@@ -5,6 +5,15 @@ function init(){
     chrome.tabs.query({},function(tab){
         stack = tab;
     });
+
+    chrome.contextMenus.create({"contexts":["all"],"id": "pinTab","title": "Pin/Unpin Tab"});
+    chrome.contextMenus.create({"contexts":["all"],"id": "subMute","title": "Mute/Unmute"});
+        chrome.contextMenus.create({"contexts":["all"],"id": "muteTab","parentId": "subMute","title": "Mute/Unmute Tab"});
+        chrome.contextMenus.create({"contexts":["all"],"id": "muteAllOthers","parentId": "subMute","title": "Mute all other Tabs"});
+        chrome.contextMenus.create({"contexts":["all"],"id": "unmuteAllOthers","parentId": "subMute","title": "Unmute all other Tabs"});
+    chrome.contextMenus.create({"contexts":["all"],"id": "duplicateTab","title": "Duplicate Tab"});
+    chrome.contextMenus.create({"contexts":["all"],"id": "closeAllOthers","title": "Close all other Tabs"});
+    chrome.contextMenus.create({"contexts":["all"],"id": "closeTab","title": "Close Tab"});
 }
 
 function broadcast(data,sender){
@@ -16,8 +25,41 @@ function broadcast(data,sender){
                 chrome.tabs.sendMessage(x.id,data);
             }
         });
+        console.log(tab);
     });
 }
+
+chrome.contextMenus.onClicked.addListener(
+    function(response,tab){
+        if(response.menuItemId == "pinTab"){
+            chrome.tabs.update(tab.id,{pinned: !tab.pinned});
+
+        }else if(response.menuItemId == "muteTab"){
+            chrome.tabs.update(tab.id,{muted: !tab.mutedInfo.muted});
+
+        }else if(response.menuItemId == "muteAllOthers"){
+            $.each(stack,function(i,x){
+                if(x.id != tab.id && x.audible) chrome.tabs.update(x.id,{muted: true});
+            });
+
+        }else if(response.menuItemId == "unmuteAllOthers"){
+            $.each(stack,function(i,x){
+                if(x.id != tab.id && x.audible) chrome.tabs.update(x.id,{muted: false});
+            });
+
+        }else if(response.menuItemId == "duplicateTab"){
+            chrome.tabs.create({url:tab.url});
+
+        }else if(response.menuItemId == "closeTab"){
+            chrome.tabs.remove(tab.id);
+
+        }else if(response.menuItemId == "closeAllOthers"){
+            $.each(stack,function(i,x){
+                if(x.id != tab.id) chrome.tabs.remove(x.id);
+            });
+
+        }
+});
 
 chrome.runtime.onMessage.addListener(
     function(response, tab, callback){

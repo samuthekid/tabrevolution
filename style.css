@@ -7,7 +7,7 @@
 
 div#tr{
     position: fixed !important;
-    top: -58px !important;
+    top: -58px !important;/*-58*/
     left: 0px !important;
     min-width: 100vw !important;
     width: 100vw !important;
@@ -37,6 +37,7 @@ div.tr_tops{
     width: 100% !important;
     max-width: 100% !important;
     background-color: #31363b !important;
+    border-radius: 0px !important;
     box-shadow: 0px -10px 20px 0px rgba(0, 0, 0, 0.45) inset !important;
 }
 
@@ -64,6 +65,7 @@ li.tr_tab{
     margin: 0px 1px !important;
     cursor: default !important;
     border-radius: 3px 3px 0px 0px !important;
+    box-sizing: content-box !important;
 }
 
 li.tr_tab:hover:not(.tr_this){

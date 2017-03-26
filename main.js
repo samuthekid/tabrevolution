@@ -100,6 +100,8 @@ function addEvents(){
     $(".tr_tab").click(function(e) {
         if(e.target.className.includes("tr_tab_close")){
             chrome.runtime.sendMessage({"code":"closeTab","tabId":parseInt(e.target.closest("li").dataset["tabid"])});
+        }else if(e.target.className.includes("tr_tab_sound")){
+            chrome.runtime.sendMessage({"code":"muteTab","tabId":parseInt(e.target.closest("li").dataset["tabid"])});
         }else{
             chrome.runtime.sendMessage({"code":"setActive","tabId":parseInt(e.target.closest("li").dataset["tabid"])});
         }
@@ -140,7 +142,7 @@ function redraw(){
     $("#tr").html("");
 
     tops = $("<div>");
-    tops.addClass("tr_tops");
+    tops.addClass("tr_reset tr_tops");
 
     pins = $("<ul>");
     pins.attr("id","tr_pins");
@@ -169,29 +171,30 @@ function redraw(){
                 li.addClass("tr_pinned");
                 fav = $("<img>");
 
-                if(x.audible){
-                    // AUDIBLE
-                    fav.addClass("tr_tab_sound");
-                    if(x.mutedInfo.muted)
-                        fav.attr("src",chrome.extension.getURL("assets/no_sound.png"));
-                    else
-                        fav.attr("src",chrome.extension.getURL("assets/sound.png"));
+                fav.addClass("tr_reset tr_favicon");
+                if(x.status == "loading"){
+                    // LOADING
+                    isLoading = true;
+                    fav.attr("src",chrome.extension.getURL("assets/loading.gif"));
                 }else{
-                    // NOT AUDIBLE
-                    fav.addClass("tr_favicon");
-                    if(x.status == "loading"){
-                        // LOADING
-                        isLoading = true;
-                        fav.attr("src",chrome.extension.getURL("assets/loading.gif"));
-                    }else{
-                        // COMPLETE
-                        if(!x.favIconUrl || x.favIconUrl.includes("chrome://"))
-                            fav.attr("src",chrome.extension.getURL("assets/internet.png"));
-                        else
-                            fav.attr("src",x.favIconUrl);
-                    }
+                    // COMPLETE
+                    if(!x.favIconUrl || x.favIconUrl.includes("chrome://"))
+                        fav.attr("src",chrome.extension.getURL("assets/internet.png"));
+                    else
+                        fav.attr("src",x.favIconUrl);
                 }
                 li.append(fav);
+
+                if(x.audible){
+                    // AUDIBLE
+                    snd = $("<img>");
+                    snd.addClass("tr_reset tr_tab_sound");
+                    if(x.mutedInfo.muted)
+                        snd.attr("src",chrome.extension.getURL("assets/no_sound.png"));
+                    else
+                        snd.attr("src",chrome.extension.getURL("assets/sound.png"));
+                    li.append(snd);
+                }
 
                 pins.append(li);
 
@@ -199,7 +202,7 @@ function redraw(){
 
                 // NOT PINNED
                 fav = $("<img>");
-                fav.addClass("tr_favicon");
+                fav.addClass("tr_reset tr_favicon");
                 if(x.status == "loading"){
                     // LOADING
                     isLoading = true;
@@ -221,7 +224,7 @@ function redraw(){
                 if(x.audible){
                     // AUDIBLE
                     snd = $("<img>");
-                    snd.addClass("tr_tab_sound");
+                    snd.addClass("tr_reset tr_tab_sound");
                     if(x.mutedInfo.muted)
                         snd.attr("src",chrome.extension.getURL("assets/no_sound.png"));
                     else
@@ -230,7 +233,7 @@ function redraw(){
                 }
 
                 close = $("<img>");
-                close.addClass("tr_tab_close");
+                close.addClass("tr_reset tr_tab_close");
                 close.attr("src",chrome.extension.getURL("assets/close.png"));
                 li.append(close);
 

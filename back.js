@@ -81,6 +81,14 @@ chrome.runtime.onMessage.addListener(
         }else if(response.code == "createTab"){
             chrome.tabs.create({});
 
+        }else if(response.code == "muteTab"){
+            $.each(stack,function(i,x){
+                if(x.id == response.tabId){
+                    chrome.tabs.update(response.tabId,{muted: !x.mutedInfo.muted});
+                    return;
+                }
+            });
+
         }else if(response.code == "closeTab"){
             chrome.tabs.remove(response.tabId);
             if(response.tabId != tab.tab.id)

@@ -26,7 +26,7 @@ div#tr.tr_hover{
 }
 
 div#tr.tr_disabled{
-    top: -500px !important;
+    top: -500px !important;/*-500*/
 }
 
 div.tr_tops{
@@ -54,14 +54,14 @@ ul.tr_sortable_pinned{
 
 li.tr_tab{
     background-color: #989a9d !important;
-    min-width: 40px !important;
+    min-width: 36px !important;
     width: 200px !important;
     max-width: 200px !important;
     display: flex !important;
     flex-direction: row !important;
     justify-content: flex-start !important;
     align-items: center !important;
-    padding: 4px 7px !important;
+    padding: 4px 6px !important;
     margin: 0px 1px !important;
     cursor: default !important;
     border-radius: 3px 3px 0px 0px !important;
@@ -88,7 +88,7 @@ img.tr_favicon{
 
 span.tr_tab_title{
     flex: 1 !important;
-    margin: 0px 6px !important;
+    margin-left: 6px !important;
     text-overflow: ellipsis !important;
     overflow: hidden !important;
     white-space: nowrap !important;
@@ -101,7 +101,7 @@ span.tr_tab_title{
 img.tr_tab_sound{
     height: 12px !important;
     width: 12px !important;
-    margin-right: 6px !important;
+    margin-left: 6px !important;
     cursor: pointer !important;
     opacity: 0.4 !important;
 }
@@ -113,6 +113,7 @@ img.tr_tab_sound:hover{
 img.tr_tab_close{
     height: 10px !important;
     width: 10px !important;
+    margin-left: 6px !important;
     cursor: pointer !important;
     opacity: 0.4 !important;
 }
@@ -124,7 +125,8 @@ img.tr_tab_close:hover{
 div.tr_new_tab{
     display: flex !important;
     align-items: center !important;
-    padding: 0px 5px !important;
+    padding: 0px 1.5% 0px 5px!important;
+    cursor: pointer !important;
 }
 
 img.tr_new_tab_icon{

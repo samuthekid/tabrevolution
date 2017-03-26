@@ -2,7 +2,7 @@
 	"name": "Tab Revolution",
 	"short_name": "TR",
 	"description": "Tab Revolution allows you to have WORKING tabs in Chrome fullscreen mode!",
-	"version": "1.0",
+	"version": "1.1.2",
 	"author": "Los Admins",
 	"icons": {
 		"16": "icons/16.png",
@@ -11,15 +11,15 @@
 	},
 	
 	"background": {
-		"persistent": false,
+		"persistent": true,
 		"scripts": ["jquery-3.0.0.js", "back.js"]
 	},
 
 	"content_scripts": [
 		{
-			"persistent": false,
+			"persistent": true,
 			"js": ["jquery-3.0.0.js", "jquery-ui.js", "main.js", "style.css"],
-			"matches": ["*://*/*"],
+			"matches": ["chrome://*/*", "<all_urls>"],
 			"run_at": "document_end"
 		}
 	],
@@ -37,7 +37,13 @@
 	],
 
 	"permissions": [
-		"http://*/*", "https://*/*", "tabs", "background", "contextMenus"
+		"chrome://*/*",
+		"http://*/*",
+		"https://*/*",
+		"tabs",
+		"activeTab",
+		"background",
+		"contextMenus"
 	],
 	"content_security_policy": "script-src 'self'; object-src 'self'",
 	"minimum_chrome_version": "40",

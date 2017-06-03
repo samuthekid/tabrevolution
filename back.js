@@ -63,6 +63,7 @@ chrome.contextMenus.onClicked.addListener(
 
 chrome.runtime.onMessage.addListener(
     function(response, tab, callback){
+
         if(response.code == "getData"){
             callback({stack: stack,
                       myId: tab.tab.id,
@@ -102,8 +103,6 @@ chrome.runtime.onMessage.addListener(
         }
 });
 
-init();
-
 chrome.tabs.onUpdated.addListener(function(tabId,changeInfo,tab){
     console.log("onUpdated activated");
     broadcast(null,null);
@@ -141,5 +140,7 @@ chrome.tabs.onRemoved.addListener(function(tabId,removeInfo){
 
 chrome.tabs.onReplaced.addListener(function(addedTabId,removedTabId){
     console.log("onReplaced activated");
-    broadcast(null,null);
+    //broadcast(null,null);
 });
+
+init();
